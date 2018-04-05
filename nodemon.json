@@ -1,0 +1,14 @@
+{
+  "watch": [
+    "server/src",
+    "shared/src"
+  ],
+  "ext": "ts",
+  "ignore": [
+    "server/src/**/*.spec.ts"
+  ],
+  "exec": "ts-node --inspect --project ./server/tsconfig.json ./server/src/main.ts",
+  "env": {
+    "NODE_ENV": "development"
+  }
+}

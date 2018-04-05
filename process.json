@@ -1,0 +1,12 @@
+{
+    "apps": [
+        {
+            "name": "mean-mest",
+            "script": "./dist/server/src/main.js",
+            "watch": true,
+            "env": {
+                "NODE_ENV": "production"
+            }
+        }
+    ]
+}
