@@ -1,0 +1,5 @@
+<div *ngIf="isShowSpinner$ | async" class="spinner">
+  <div class="spinner-message">
+    <h1>{{messageSpinner$ | async}}</h1>
+  </div>
+</div>

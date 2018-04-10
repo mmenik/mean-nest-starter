@@ -1,3 +1,18 @@
-<section [class.candy-theme]="true">
+<!-- <section [class.dark-theme]="true">
     <router-outlet></router-outlet>
+</section> -->
+<section class="container" fxLayout="column">
+    <app-header (toggleSidenav)="sidenav.toggle()"></app-header>
+    <mat-sidenav-container class="content" fxFlex>
+        <mat-sidenav #sidenav mode="side">
+            <app-sidenav (closeSidenav)="sidenav.close()"></app-sidenav>
+        </mat-sidenav>
+        <mat-sidenav-content>
+            <main>
+                <router-outlet></router-outlet>
+            </main>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+    <app-footer></app-footer>
 </section>
+<app-spinner></app-spinner>

@@ -2,12 +2,12 @@
 
 @include mat-core();
 
-$primary: mat-palette($mat-red);
-$accent: mat-palette($mat-blue);
+// $primary: mat-palette($mat-red);
+// $accent: mat-palette($mat-blue);
 
-$theme: mat-light-theme($primary, $accent);
+// $theme: mat-light-theme($primary, $accent);
 
-@include angular-material-theme($theme);
+// @include angular-material-theme($theme);
 
 $dark-primary: mat-palette($mat-blue-grey);
 $dark-accent:  mat-palette($mat-amber, A200, A100, A400);
@@ -18,11 +18,11 @@ $dark-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
     @include angular-material-theme($dark-theme);
 }
 
-$candy-app-primary: mat-palette($mat-red);
-$candy-app-accent:  mat-palette($mat-pink, A200, A100, A400);
-$candy-app-warn:    mat-palette($mat-red);
-$candy-app-theme:   mat-light-theme($candy-app-primary, $candy-app-accent, $candy-app-warn);
+$candy-primary: mat-palette($mat-red);
+$candy-accent:  mat-palette($mat-pink, A200, A100, A400);
+$candy-warn:    mat-palette($mat-red);
+$candy-theme:   mat-light-theme($candy-primary, $candy-accent, $candy-warn);
 
 .candy-theme {
-    @include angular-material-theme($candy-app-theme);
+    @include angular-material-theme($candy-theme);
 }

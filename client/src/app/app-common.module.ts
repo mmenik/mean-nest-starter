@@ -1,22 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {
-    MatCardModule,
-    MatInputModule,
-    MatButtonModule
-} from '@angular/material';
-
-const COMMON_MODULE = [
-    CommonModule,
-    FlexLayoutModule,
-    MatCardModule,
-    MatInputModule,
-    MatButtonModule
-];
+import { MaterialModule } from './material.module';
 
 @NgModule({
-    imports: [COMMON_MODULE],
-    exports: [COMMON_MODULE]
+    imports: [
+        CommonModule,
+        FlexLayoutModule,
+        MaterialModule
+    ],
+    exports: [
+        CommonModule,
+        FlexLayoutModule,
+        MaterialModule
+    ]
 })
 export class AppCommonModule { }

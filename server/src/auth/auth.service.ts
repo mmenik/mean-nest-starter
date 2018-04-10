@@ -13,7 +13,7 @@ export class AuthService {
     private readonly _secret: string = v4();
 
     constructor(private readonly userService: UserService,
-        private passwordCryptService: PasswordCryptService,
+        private readonly passwordCryptService: PasswordCryptService,
         private readonly log: LogService) { }
 
     get secret(): string {

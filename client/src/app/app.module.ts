@@ -1,26 +1,48 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+
+import { StoreModule } from '@ngrx/store';
+import { JwtModule } from '@auth0/angular-jwt';
+
+import { AuthService } from './auth/auth.service';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
+
 import { AppRoutingModule } from './app-routing.module';
-import { AppCommonModule } from './app-common.module';
 import { AuthModule } from './auth/auth.module';
+import { LayoutModule } from './layout/layout.module';
+
+import { reducers, metaReducers } from './app.reducer';
+import { AppCommonModule } from './app-common.module';
+import { LayoutService } from './layout/layout.service';
+import { BagModule } from './bag/bag.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HomeComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     AppCommonModule,
     AppRoutingModule,
-    AuthModule
+    LayoutModule,
+    AuthModule,
+    BagModule,
+    StoreModule.forRoot(reducers, { metaReducers }),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return localStorage.getItem('token');
+        },
+        whitelistedDomains: ['localhost:4000']
+      }
+    })
   ],
-  providers: [],
+  providers: [AuthService, LayoutService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -20,8 +20,14 @@ import { NotFoundExceptionFilter } from './common/exceptions/not-found-exception
 import { UnauthorizedExceptionFilter } from './common/exceptions/unauthorized-exception.filter';
 import { AllExceptionFilter } from './common/exceptions/all-exception.filter';
 
-import 'rxjs/add/operator/do';
+import 'rxjs/add/observable/throw';
+import 'rxjs/add/observable/interval';
+import 'rxjs/add/observable/of';
 
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/delay';
 // dotenv.config();
 
 const environment = require(`./environments/environment${process.env.NODE_ENV === 'production' ? '.prod' : ''}`).environment;
@@ -53,7 +59,7 @@ async function bootstrap() {
 
     const swaggerConfig = new DocumentBuilder()
         .addBearerAuth()
-        .setTitle('ts-mean sample api')
+        .setTitle('Mean Nest Starter Sample api')
         .addTag('Auth')
         .addTag('Users')
         .setDescription('Sample REST API that allows to manage list of users')

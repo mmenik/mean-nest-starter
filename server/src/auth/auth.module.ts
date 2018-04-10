@@ -18,20 +18,4 @@ export class AuthModule implements NestModule {
         consumer.apply(AuthMiddleware)
             .forRoutes(UserController);
     }
-    // public configure(consumer: MiddlewaresConsumer) {
-    //     consumer.apply(passport.authenticate('jwt', { session: false }))
-    //         .forRoutes(ContactController);
-    // }
-    // public configure(consumer: MiddlewaresConsumer) {
-    //     consumer.apply(passport.authenticate('jwt', { session: false }, (err, user, info) => {
-    //         console.log('err:', err);
-    //         console.log('user:', user);
-    //         console.log('info', info);
-
-    //         if (!user) {
-    //             throw new UnauthorizedException();
-    //         }
-    //     }))
-    //         .forRoutes(ContactController);
-    // }
 }

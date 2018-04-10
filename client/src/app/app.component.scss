@@ -1,0 +1,9 @@
+.container {    
+    height: 100%;
+    display: flex;
+}
+
+.content {
+    position: relative;
+    overflow-y: auto;    
+}
