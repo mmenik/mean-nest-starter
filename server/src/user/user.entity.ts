@@ -1,5 +1,5 @@
 import { Entity, ObjectIdColumn, ObjectID, Column } from 'typeorm';
-import { AccountDto } from '../../../shared/src/dto/account.dto';
+import { UserDto } from '../../../shared/src/dto/user.dto';
 
 @Entity()
 export class User {
@@ -21,12 +21,12 @@ export class User {
     @Column()
     lastname: string;
 
-    static fromDto(dto: AccountDto, password: string): User {
+    static fromDto(dto: UserDto, password: string): User {
         const entity: User = new User();
         entity.admin = false;
-        entity.firstname = dto.user.firstname;
-        entity.lastname = dto.user.lastname;
-        entity.username = dto.login.username;
+        entity.firstname = dto.firstname;
+        entity.lastname = dto.lastname;
+        entity.username = dto.username;
         entity.password = password;
 
         return entity;

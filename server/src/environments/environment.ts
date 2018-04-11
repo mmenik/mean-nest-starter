@@ -1,6 +1,6 @@
 export const environment = {
     production: false,
-    port: 4000,
+    port: 3000,
     dist: 'dist',
     orm: {
         type: 'mongodb',

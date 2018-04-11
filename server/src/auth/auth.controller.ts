@@ -20,7 +20,7 @@ export class AuthController {
     @HttpCode(HttpStatus.OK)
     public async login(@Body() login: LoginDto) {
         if (await this.authService.authenticateUser(login.username, login.password)) {
-            return Observable.of(await this.authService.createToken(login.username)).delay(2000);
+            return Observable.of(await this.authService.createToken(login.username)).delay(500);
         }
 
         throw new BadRequestException('Incorrect email or password');

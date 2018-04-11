@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { StoreModule } from '@ngrx/store';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -17,7 +17,8 @@ import { LayoutModule } from './layout/layout.module';
 import { reducers, metaReducers } from './app.reducer';
 import { AppCommonModule } from './app-common.module';
 import { LayoutService } from './layout/layout.service';
-import { BagModule } from './bag/bag.module';
+import { UserService } from './user/user.service';
+import { AppHttpInterceptor } from './app-http.interceptor';
 
 @NgModule({
   declarations: [
@@ -31,18 +32,26 @@ import { BagModule } from './bag/bag.module';
     AppRoutingModule,
     LayoutModule,
     AuthModule,
-    BagModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     JwtModule.forRoot({
       config: {
         tokenGetter: () => {
           return localStorage.getItem('token');
         },
-        whitelistedDomains: ['localhost:4000']
+        whitelistedDomains: [/^null$/]
       }
     })
   ],
-  providers: [AuthService, LayoutService],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AppHttpInterceptor,
+      multi: true
+    },
+    AuthService,
+    UserService,
+    LayoutService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

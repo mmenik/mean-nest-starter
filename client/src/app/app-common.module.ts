@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MaterialModule } from './material.module';
+import { AppMaterialModule } from './app-material.module';
 
 @NgModule({
     imports: [
         CommonModule,
         FlexLayoutModule,
-        MaterialModule
+        AppMaterialModule
     ],
     exports: [
         CommonModule,
         FlexLayoutModule,
-        MaterialModule
+        AppMaterialModule
     ]
 })
 export class AppCommonModule { }

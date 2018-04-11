@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { LayoutActions, SHOW_SPINNER, HIDE_SPINNER, UPDATE_SPINNER, TOGGLE_THEME } from './layout.actions';
+import * as Layout from './layout.actions';
 
 export interface State {
     isShowSpinner: boolean;
@@ -14,26 +14,26 @@ const initialState: State = {
     isDarkTheme: false
 };
 
-export function layoutReducer(state = initialState, action: LayoutActions) {
+export function layoutReducer(state = initialState, action: Layout.LayoutActions) {
     switch (action.type) {
-        case SHOW_SPINNER:
+        case Layout.SHOW_SPINNER:
             return {
                 ...state,
                 isShowSpinner: true,
                 messageSpinner: action.payload
             };
-        case HIDE_SPINNER:
+        case Layout.HIDE_SPINNER:
             return {
                 ...state,
                 isShowSpinner: false
             };
-        case UPDATE_SPINNER:
+        case Layout.UPDATE_SPINNER:
             return {
                 ...state,
                 messageSpinner: action.payload
 
             };
-        case TOGGLE_THEME:
+        case Layout.TOGGLE_THEME:
             return {
                 ...state,
                 isDarkTheme: !state.isDarkTheme

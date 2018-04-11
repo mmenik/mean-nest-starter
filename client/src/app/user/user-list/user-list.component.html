@@ -1,0 +1,19 @@
+<mat-table [dataSource]="matTableDataSource">
+  <ng-container matColumnDef="username">
+    <mat-header-cell *matHeaderCellDef>Username</mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.username}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="firstname">
+    <mat-header-cell *matHeaderCellDef>Firstname</mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.firstname}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="lastname">
+    <mat-header-cell *matHeaderCellDef>Lastname</mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.lastname}} </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="matTableDataSourceColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: matTableDataSourceColumns;"></mat-row>
+</mat-table>

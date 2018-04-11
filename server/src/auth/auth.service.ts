@@ -24,10 +24,11 @@ export class AuthService {
         this.log.info(`Create token for user: ${username}`);
         const secretOrPrivateKey: jwt.Secret = this.secret;
         const options: jwt.SignOptions = {
-            expiresIn: '1m',
+            expiresIn: '10m',
             algorithm: 'HS256'
         };
         const token = jwt.sign({ username }, secretOrPrivateKey, options);
+        this.log.info(`Token: ${token}`);
         return {
             expiresIn: options.expiresIn,
             token: token,

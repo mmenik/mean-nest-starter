@@ -20,8 +20,6 @@ export class DateComponent implements OnInit, OnDestroy {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.language);
-    console.log(this.value);
     moment.locale(this.language);
     if (this.value) {
       this.date = moment(new Date(this.value)).format('DD-MM-YYYY HH:mm:ss');

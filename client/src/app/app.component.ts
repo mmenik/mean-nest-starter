@@ -2,10 +2,11 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { AuthService } from './auth/auth.service';
 import { Observable } from 'rxjs/Observable';
 
-import { Store } from '@ngrx/store';
-import * as fromRoot from './app.reducer';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { environment } from '../environments/environment';
+
+import { Store } from '@ngrx/store';
+import * as fromRoot from './app.reducer';
 
 @Component({
   selector: 'app-root',

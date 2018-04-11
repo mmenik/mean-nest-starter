@@ -1,5 +1,4 @@
 import { Controller, Body, Post, HttpCode, HttpStatus, Get, UseInterceptors } from '@nestjs/common';
-import { AccountDto } from '../../../shared/src/dto/account.dto';
 import { ApiOperation, ApiResponse, ApiUseTags, ApiBearerAuth } from '@nestjs/swagger';
 import { UserService } from './user.service';
 import { LogService } from '../log/log.service';
@@ -28,7 +27,7 @@ export class UserController {
     @ApiResponse({ status: 400, description: 'Email or password are not valid!' })
     @HttpCode(HttpStatus.OK)
     @Post()
-    async create(@Body() account: AccountDto): Promise<User> {
-        return await this.userService.create(account);
+    async create(@Body() user: UserDto): Promise<User> {
+        return await this.userService.create(user);
     }
 }

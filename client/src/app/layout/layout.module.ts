@@ -8,6 +8,7 @@ import { DateComponent } from './date/date.component';
 
 import { SpinnerComponent } from './spinner/spinner.component';
 import { AppCommonModule } from '../app-common.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
     declarations: [
@@ -19,7 +20,8 @@ import { AppCommonModule } from '../app-common.module';
         SpinnerComponent
     ],
     imports: [
-        AppCommonModule
+        AppCommonModule,
+        RouterModule
     ],
     exports: [
         HeaderComponent,

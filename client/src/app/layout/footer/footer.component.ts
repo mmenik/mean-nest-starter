@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 import { Store } from '@ngrx/store';
-import { ToggleTheme } from '../layout.actions';
+import * as Layout from '../../layout/layout.actions';
 import * as fromRoot from '../../app.reducer';
 
 @Component({
@@ -22,6 +22,6 @@ export class FooterComponent implements OnInit {
   }
 
   onToggleTheme() {
-    this.store.dispatch(new ToggleTheme());
+    this.store.dispatch(new Layout.ToggleTheme());
   }
 }
