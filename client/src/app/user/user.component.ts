@@ -12,4 +12,7 @@ export class UserComponent implements OnInit {
   ngOnInit() {
   }
 
+  onAddUser() {
+    console.log('add user');
+  }
 }

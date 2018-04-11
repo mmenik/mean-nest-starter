@@ -1,4 +1,19 @@
-<section mat-elevation-z4>
-  <div class="title">Users</div>
-  <app-user-list></app-user-list>
+<section>
+  <mat-card>
+    <mat-card-title-group fxLayout="row">
+      <div fxFlex fxLayoutAlign="right center" class="title">Users</div>
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="onAddUser()">
+          <mat-icon>add</mat-icon>
+          <span>Add User</span>
+        </button>
+      </mat-menu>
+    </mat-card-title-group>
+    <mat-card-content>
+      <app-user-list></app-user-list>
+    </mat-card-content>
+  </mat-card>
 </section>
