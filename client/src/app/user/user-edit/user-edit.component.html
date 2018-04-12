@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>New user</h2>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <mat-dialog-content>
+    <div fxLayout="row" fxLayoutGap="10px">
+      <mat-form-field>
+        <input type="text" matInput placeholder="Username *" formControlName="username">
+        <mat-error>Username is required</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input type="password" matInput placeholder="Password *" formControlName="password">
+        <mat-error>Password is required</mat-error>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutGap="10px">
+      <mat-form-field>
+        <input type="text" matInput placeholder="Firstname" formControlName="firstname">
+      </mat-form-field>
+      <mat-form-field>
+        <input type="text" matInput placeholder="Lastname" formControlName="lastname">
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <div fxFlex fxLayoutAlign="space-between center">
+      <button type="submit" mat-raised-button color="primary" [disabled]="form.invalid">Save</button>
+      <button mat-raised-button [mat-dialog-close]="false" color="warn">Cancel</button>
+    </div>
+  </mat-dialog-actions>
+</form>

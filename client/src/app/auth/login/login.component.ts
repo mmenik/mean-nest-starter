@@ -20,14 +20,14 @@ export class LoginComponent implements OnInit {
     private readonly fb: FormBuilder,
     private readonly store: Store<fromRoot.State>) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.form = this.fb.group({
       username: ['', <any>Validators.required],
       password: ['', <any>Validators.required]
     });
   }
 
-  onSubmit(): void {
+  onSubmit() {
     const login: LoginDto = {
       username: this.form.value.username,
       password: this.form.value.password

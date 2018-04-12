@@ -10,7 +10,9 @@ import {
     MatSnackBarModule,
     MatListModule,
     MatTableModule,
-    MatMenuModule
+    MatMenuModule,
+    MatButtonToggleModule,
+    MatDialogModule
 } from '@angular/material';
 
 @NgModule({
@@ -25,7 +27,9 @@ import {
         MatSnackBarModule,
         MatListModule,
         MatTableModule,
-        MatMenuModule
+        MatMenuModule,
+        MatButtonToggleModule,
+        MatDialogModule
     ]
 })
 export class AppMaterialModule { }

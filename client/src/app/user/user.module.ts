@@ -5,16 +5,22 @@ import { AppCommonModule } from '../app-common.module';
 import { UserListComponent } from './user-list/user-list.component';
 import { StoreModule } from '@ngrx/store';
 import { userReducer } from './user.reducer';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UserEditComponent } from './user-edit/user-edit.component';
 
 @NgModule({
   imports: [
     AppCommonModule,
     UserRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     StoreModule.forFeature('user', userReducer)
   ],
   declarations: [
     UserComponent,
-    UserListComponent
-  ]
+    UserListComponent,
+    UserEditComponent
+  ],
+  entryComponents: [UserEditComponent]
 })
 export class UserModule { }

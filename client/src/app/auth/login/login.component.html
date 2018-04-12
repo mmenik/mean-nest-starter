@@ -5,14 +5,14 @@
       <form fxLayout="column" fxLayoutGap="10px" [formGroup]="form" (ngSubmit)="onSubmit()">
         <p>Please login to continue</p>
         <mat-form-field>
-          <input type="text" matInput placeholder="Username" formControlName="username">
-          <mat-hint>Please enter a valid username.</mat-hint>
-          <mat-error>Invalid or missing username.</mat-error>
+          <input type="text" matInput placeholder="Username *" formControlName="username" autofocus>
+          <mat-hint>Please enter a valid username</mat-hint>
+          <mat-error>Invalid or missing username</mat-error>
         </mat-form-field>
         <mat-form-field>
-          <input type="password" matInput placeholder="Password" formControlName="password">
-          <mat-hint>Please enter your password.</mat-hint>
-          <mat-error>Missing password.</mat-error>
+          <input type="password" matInput placeholder="Password *" formControlName="password">
+          <mat-hint>Please enter your password</mat-hint>
+          <mat-error>Missing password</mat-error>
         </mat-form-field>
         <button type="submit" mat-raised-button color="primary" [disabled]="form.invalid">Login</button>
       </form>

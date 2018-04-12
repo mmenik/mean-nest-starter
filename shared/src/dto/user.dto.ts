@@ -3,7 +3,7 @@ import { ObjectID } from 'typeorm';
 
 export class UserDto {
     @ApiModelProperty()
-    readonly id: string;
+    readonly _id?: string;
     @ApiModelProperty()
     readonly username: string;
     @ApiModelProperty()

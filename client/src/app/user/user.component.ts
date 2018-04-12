@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material';
+import { UserEditComponent } from './user-edit/user-edit.component';
 
 @Component({
   selector: 'app-user',
@@ -6,13 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
+  view = 'table';
+  isSearch = false;
 
-  constructor() { }
+  constructor(private readonly dialog: MatDialog) { }
 
   ngOnInit() {
   }
 
-  onAddUser() {
-    console.log('add user');
+  onNewUser() {
+    const dialogRef: MatDialogRef<UserEditComponent, any> = this.dialog.open(UserEditComponent, {});
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
   }
 }

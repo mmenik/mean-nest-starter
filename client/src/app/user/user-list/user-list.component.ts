@@ -13,7 +13,7 @@ import * as fromUser from '../user.reducer';
 })
 export class UserListComponent implements OnInit {
   public matTableDataSource = new MatTableDataSource<UserDto>();
-  public matTableDataSourceColumns = ['username', 'firstname', 'lastname'];
+  public matTableDataSourceColumns = ['username', 'firstname', 'lastname', 'actions'];
 
   constructor(
     private readonly userService: UserService,
@@ -27,5 +27,12 @@ export class UserListComponent implements OnInit {
       }
     );
     this.userService.fetch();
+  }
+
+  onEdit(element: UserDto) {
+  }
+
+  onDelete(element: UserDto) {
+    this.userService.delete(element._id);
   }
 }

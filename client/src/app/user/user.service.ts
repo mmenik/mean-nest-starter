@@ -31,6 +31,7 @@ export class UserService {
                     console.log('Users:', users);
                     this.store.dispatch(new Layout.HideSpinner());
                     this.store.dispatch(new User.SetUsers(users));
+                    this.layoutService.showSnackbar('Load users successfully', null, 2000);
                 },
                 err => {
                     console.log('Fetch users error:', err);
@@ -38,5 +39,43 @@ export class UserService {
                     this.layoutService.showSnackbar(err.error.message, null, 2000);
                 }
             );
+    }
+
+    create(newUser: UserDto): Observable<UserDto> {
+        console.log('Create user:', newUser);
+        this.store.dispatch(new Layout.ShowSpinner('Create user...'));
+        return this.http.post<UserDto>(apiPath(1, 'users'), newUser)
+            .map((user: UserDto) => {
+                console.log(user);
+                this.store.dispatch(new Layout.HideSpinner());
+                this.layoutService.showSnackbar('Create user successfully', null, 2000);
+                return user;
+            })
+            .catch((err: HttpErrorResponse) => {
+                console.log(err.error);
+                this.store.dispatch(new Layout.HideSpinner());
+                this.layoutService.showSnackbar(err.error.message, null, 2000);
+                return Observable.throw(err);
+            });
+    }
+
+    delete(_id: string | number) {
+        console.log('Delete user id:', _id);
+        this.store.dispatch(new Layout.ShowSpinner('Delete user...'));
+        const url = `${apiPath(1, 'users')}/${_id}`;
+        console.log(url);
+        this.http.delete<UserDto>(url)
+            .map((user: UserDto) => {
+                console.log('User deleted:', user);
+                this.store.dispatch(new Layout.HideSpinner());
+                this.layoutService.showSnackbar('Delete user successfully', null, 2000);
+            })
+            .catch((err: HttpErrorResponse) => {
+                console.log(err.error);
+                this.store.dispatch(new Layout.HideSpinner());
+                this.layoutService.showSnackbar(err.error.message, null, 2000);
+                return Observable.throw(err);
+            })
+            .subscribe();
     }
 }

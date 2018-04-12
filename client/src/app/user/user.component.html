@@ -1,19 +1,42 @@
 <section>
-  <mat-card>
-    <mat-card-title-group fxLayout="row">
-      <div fxFlex fxLayoutAlign="right center" class="title">Users</div>
-      <button mat-icon-button [matMenuTriggerFor]="menu">
-        <mat-icon>more_vert</mat-icon>
-      </button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="onAddUser()">
-          <mat-icon>add</mat-icon>
-          <span>Add User</span>
+  <div fxFlex fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="4px" class="header-group">
+    <button mat-raised-button color="primary" (click)="onNewUser()" class="mat-button-toggle">
+      <mat-icon>person_add</mat-icon>
+    </button>
+    <button mat-raised-button color="primary" (click)="isSearch=!isSearch">
+      <mat-icon>search</mat-icon>
+    </button>
+    <form fxFlex fxLayout="column">
+      <mat-form-field *ngIf="isSearch" fxFlex>
+        <input fxFlex type="text" matInput placeholder="Search user">
+      </mat-form-field>
+    </form>
+    <mat-button-toggle-group [(ngModel)]="view">
+      <mat-button-toggle value="table">
+        <mat-icon>view_list</mat-icon>
+      </mat-button-toggle>
+      <mat-button-toggle value="module">
+        <mat-icon>view_module</mat-icon>
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+  <div class="card">
+    <mat-card>
+      <mat-card-title-group fxLayout="row">
+        <div fxFlex fxLayoutAlign="right center" class="title">Users</div>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
         </button>
-      </mat-menu>
-    </mat-card-title-group>
-    <mat-card-content>
-      <app-user-list></app-user-list>
-    </mat-card-content>
-  </mat-card>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="onNewUser()">
+            <mat-icon>person_add</mat-icon>
+            <span>Add User</span>
+          </button>
+        </mat-menu>
+      </mat-card-title-group>
+      <mat-card-content>
+        <app-user-list></app-user-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </section>

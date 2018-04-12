@@ -3,28 +3,30 @@ import { ApplicationModule } from './app.module';
 import { UserModule } from './user/user.module';
 import { UserService } from './user/user.service';
 import { User } from './user/user.entity';
-import { AccountDto } from '../../shared/src/dto/account.dto';
+import { UserDto } from '../../shared/src/dto/user.dto';
 
 async function seed() {
     const app = await NestFactory.create(ApplicationModule);
 
     const userService = app.select(UserModule).get(UserService);
 
-    const users: User[] = await userService.findAll();
+    const all: User[] = await userService.findAll();
 
-    if (users.length === 0) {
-        const user: AccountDto = {
-            user: {
-                lastname: 'admin',
-                firstname: 'admin'
-            },
-            login: {
-                username: 'admin',
-                password: 'admin'
-            }
-        };
+    if (all.length === 0) {
+        const users: UserDto[] = [{
+            lastname: 'mirko',
+            firstname: 'menichetti',
+            username: 'admin',
+            password: 'admin'
+        },
+        {
+            lastname: 'maurizio',
+            firstname: 'ragni',
+            username: 'service',
+            password: 'service'
+        }];
 
-        userService.create(user);
+        await userService.createMany(users);
     }
 }
 seed();
