@@ -41,6 +41,14 @@ export class UserService {
             );
     }
 
+    save(user: UserDto): Observable<UserDto> {
+        console.log('User to save:', user);
+        if (user._id) {
+            return this.update(user);
+        }
+        return this.create(user);
+    }
+
     create(newUser: UserDto): Observable<UserDto> {
         console.log('Create user:', newUser);
         this.store.dispatch(new Layout.ShowSpinner('Create user...'));
@@ -48,11 +56,29 @@ export class UserService {
             .map((user: UserDto) => {
                 console.log(user);
                 this.store.dispatch(new Layout.HideSpinner());
-                this.layoutService.showSnackbar('Create user successfully', null, 2000);
+                this.layoutService.showSnackbar('User created successfully', null, 2000);
                 return user;
             })
             .catch((err: HttpErrorResponse) => {
-                console.log(err.error);
+                console.log('Create error:', err.error);
+                this.store.dispatch(new Layout.HideSpinner());
+                this.layoutService.showSnackbar(err.error.message, null, 2000);
+                return Observable.throw(err);
+            });
+    }
+
+    update(updateUser: UserDto): Observable<UserDto> {
+        console.log('Update user:', updateUser);
+        this.store.dispatch(new Layout.ShowSpinner('Update user...'));
+        return this.http.put<UserDto>(apiPath(1, 'users'), updateUser)
+            .map((user: UserDto) => {
+                console.log(user);
+                this.store.dispatch(new Layout.HideSpinner());
+                this.layoutService.showSnackbar('User updated successfully', null, 2000);
+                return user;
+            })
+            .catch((err: HttpErrorResponse) => {
+                console.log('Update error:', err.error);
                 this.store.dispatch(new Layout.HideSpinner());
                 this.layoutService.showSnackbar(err.error.message, null, 2000);
                 return Observable.throw(err);

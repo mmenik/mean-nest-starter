@@ -1,4 +1,4 @@
-import { Entity, ObjectIdColumn, ObjectID, Column } from 'typeorm';
+import { Entity, ObjectIdColumn, ObjectID, Column, Index } from 'typeorm';
 import { UserDto } from '../../../shared/src/dto/user.dto';
 
 @Entity()
@@ -7,6 +7,7 @@ export class User {
     _id?: ObjectID;
 
     @Column()
+    @Index({ unique: true })
     username: string;
 
     @Column()

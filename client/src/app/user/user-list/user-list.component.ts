@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatDialog, MatDialogRef } from '@angular/material';
 import { UserDto } from '../../../../../shared/src/dto/user.dto';
 import { UserService } from '../user.service';
 
 import { Store } from '@ngrx/store';
 import * as fromUser from '../user.reducer';
+import { UserEditComponent } from '../user-edit/user-edit.component';
 
 @Component({
   selector: 'app-user-list',
@@ -16,6 +17,7 @@ export class UserListComponent implements OnInit {
   public matTableDataSourceColumns = ['username', 'firstname', 'lastname', 'actions'];
 
   constructor(
+    private readonly dialog: MatDialog,
     private readonly userService: UserService,
     private readonly store: Store<fromUser.State>
   ) { }
@@ -30,6 +32,12 @@ export class UserListComponent implements OnInit {
   }
 
   onEdit(element: UserDto) {
+    const dialogRef: MatDialogRef<UserEditComponent> = this.dialog.open(UserEditComponent, {
+      data: element
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
   }
 
   onDelete(element: UserDto) {

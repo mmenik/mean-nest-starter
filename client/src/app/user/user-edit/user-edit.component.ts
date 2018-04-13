@@ -5,6 +5,8 @@ import { UserService } from '../user.service';
 
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../../app.reducer';
+import { UserModel } from '../../../../../shared/src/model/user.model';
+import { UserDto } from '../../../../../shared/src/dto/user.dto';
 
 @Component({
   selector: 'app-user-edit',
@@ -13,9 +15,10 @@ import * as fromRoot from '../../app.reducer';
 })
 export class UserEditComponent implements OnInit {
   public form: FormGroup;
+  public title: string;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) private readonly data: any,
+    @Inject(MAT_DIALOG_DATA) public user: UserModel,
     private dialogRef: MatDialogRef<UserEditComponent>,
     private readonly fb: FormBuilder,
     private readonly userService: UserService,
@@ -23,28 +26,34 @@ export class UserEditComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log('init dialog data passed:', this.data);
+    console.log('init dialog data passed:', this.user);
+    this.title = `${this.user ? 'Edit' : 'New'} User`;
     this.store.select(fromRoot.getIsAuthenticated).subscribe(isAuth => {
       if (!isAuth) {
         this.dialogRef.close();
       }
     });
     this.form = this.fb.group({
-      username: ['', <any>Validators.required],
-      password: ['', <any>Validators.required],
-      firstname: [''],
-      lastname: ['']
+      username: [{ value: this.user ? this.user.username : '', disabled: this.user }, <any>Validators.required],
+      password: [{ value: this.user ? this.user.password : '', disabled: this.user }, <any>Validators.required],
+      firstname: [this.user ? this.user.firstname : ''],
+      lastname: [this.user ? this.user.lastname : '']
     });
   }
 
   onSubmit() {
-    console.log(this.form.value);
-    this.userService.create(this.form.value).subscribe(
-      user => {
-        console.log(user);
-      },
-      err => {
-        console.log(err);
+    if (this.user) {
+      this.user = {
+        ...this.user,
+        firstname: this.form.value.firstname, lastname: this.form.value.lastname
+      };
+    } else {
+      this.user = this.form.value;
+    }
+    this.userService.save(this.user).subscribe(
+      (user: UserModel) => {
+        this.user = user;
+        this.form.reset(this.user);
       }
     );
   }

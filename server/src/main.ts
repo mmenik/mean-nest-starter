@@ -62,6 +62,7 @@ async function bootstrap() {
         .setTitle('Mean Nest Starter Sample api')
         .addTag('Auth')
         .addTag('Users')
+        .addTag('Bags')
         .setDescription('Sample REST API that allows to manage list of users')
         .setVersion('1.0')
         .build();

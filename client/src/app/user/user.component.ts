@@ -17,7 +17,7 @@ export class UserComponent implements OnInit {
   }
 
   onNewUser() {
-    const dialogRef: MatDialogRef<UserEditComponent, any> = this.dialog.open(UserEditComponent, {});
+    const dialogRef: MatDialogRef<UserEditComponent> = this.dialog.open(UserEditComponent);
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
     });

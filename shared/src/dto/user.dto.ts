@@ -1,5 +1,4 @@
 import { ApiModelProperty } from '@nestjs/swagger';
-import { ObjectID } from 'typeorm';
 
 export class UserDto {
     @ApiModelProperty()

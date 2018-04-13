@@ -1,7 +1,7 @@
 import { Component } from '@nestjs/common';
 import { LogService } from '../log/log.service';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, DeepPartial } from 'typeorm';
 import { User } from './user.entity';
 import { PasswordCryptService } from '../auth/password/password-crypt.service';
 import { UserDto } from '../../../shared/src/dto/user.dto';
@@ -61,7 +61,7 @@ export class UserService {
         return result;
     }
 
-    async updateOne(user: UserDto): Promise<User> {
+    async updateOne(user: DeepPartial<UserDto>): Promise<User> {
         this.log.info(`User to update ${JSON.stringify(user)}`);
 
         const userToUpdate: User = await this.findById(user._id);
@@ -70,8 +70,13 @@ export class UserService {
         await this.repositiry.merge(userToUpdate, user);
         this.log.info(`User merge ${JSON.stringify(userToUpdate)}`);
 
-        const result: User = await this.repositiry.save(userToUpdate);
-        this.log.debug(`User updated ${JSON.stringify(result)}`);
+        const result: User = this.repositiry.create();
+        try {
+            await this.repositiry.save(userToUpdate);
+            this.log.debug(`User updated ${JSON.stringify(result)}`);
+        } catch (error) {
+            console.log('Error update:', error);
+        }
 
         return result;
     }

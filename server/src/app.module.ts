@@ -1,8 +1,11 @@
 import { Module, NestModule, MiddlewaresConsumer, RequestMethod } from '@nestjs/common';
+import { MongooseModule } from '@nestjs/mongoose';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
+import { BagModule } from './bag/bag.module';
 import { LogModule } from './log/log.module';
+
 import { LogMiddleware } from './common/middlewares/log.middleware';
 
 import { AuthController } from './auth/auth.controller';
@@ -13,7 +16,9 @@ const environment = require(`./environments/environment${process.env.NODE_ENV ==
 
 @Module({
   imports: [
+    MongooseModule.forRoot('mongodb://localhost/mean-nest-starter'),
     TypeOrmModule.forRoot(environment.orm),
+    BagModule,
     LogModule,
     AuthModule,
     UserModule
