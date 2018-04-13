@@ -1,11 +1,12 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { UserDto } from '../../../../shared/src/dto/user.dto';
+import { UserModel } from './user.model';
 
 import * as User from './user.actions';
 import * as fromRoot from '../app.reducer';
+import { ReturnStatement } from '@angular/compiler';
 
 export interface UserState {
-    users: UserDto[];
+    users: UserModel[];
 }
 
 export interface State extends fromRoot.State {
@@ -22,6 +23,26 @@ export function userReducer(state = initialState, action: User.UserActions) {
             return {
                 ...state,
                 users: action.payload
+            };
+        case User.ADD_USER:
+            return {
+                ...state,
+                users: [...state.users, action.payload]
+            };
+        case User.UPDATE_USER:
+            return {
+                ...state,
+                users: [...state.users].map(user => {
+                    if (user._id === action.payload._id) {
+                        return { ...user, ...action.payload };
+                    }
+                    return user;
+                })
+            };
+        case User.DELETE_USER:
+            return {
+                ...state,
+                users: [...state.users].filter(user => user._id !== action.payload._id)
             };
         default:
             return state;

@@ -5,8 +5,7 @@ import { UserService } from '../user.service';
 
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../../app.reducer';
-import { UserModel } from '../../../../../shared/src/model/user.model';
-import { UserDto } from '../../../../../shared/src/dto/user.dto';
+import { UserModel } from '../user.model';
 
 @Component({
   selector: 'app-user-edit',

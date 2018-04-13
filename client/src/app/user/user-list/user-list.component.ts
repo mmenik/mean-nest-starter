@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource, MatDialog, MatDialogRef } from '@angular/material';
-import { UserDto } from '../../../../../shared/src/dto/user.dto';
 import { UserService } from '../user.service';
 
 import { Store } from '@ngrx/store';
 import * as fromUser from '../user.reducer';
 import { UserEditComponent } from '../user-edit/user-edit.component';
+import { UserModel } from '../user.model';
 
 @Component({
   selector: 'app-user-list',
@@ -13,7 +13,7 @@ import { UserEditComponent } from '../user-edit/user-edit.component';
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
-  public matTableDataSource = new MatTableDataSource<UserDto>();
+  public matTableDataSource = new MatTableDataSource<UserModel>();
   public matTableDataSourceColumns = ['username', 'firstname', 'lastname', 'actions'];
 
   constructor(
@@ -24,14 +24,15 @@ export class UserListComponent implements OnInit {
 
   ngOnInit() {
     this.store.select(fromUser.getUsers).subscribe(
-      (users: UserDto[]) => {
+      (users: UserModel[]) => {
+        console.log('DATA SOURCE:', users);
         this.matTableDataSource.data = users;
       }
     );
     this.userService.fetch();
   }
 
-  onEdit(element: UserDto) {
+  onEdit(element: UserModel) {
     const dialogRef: MatDialogRef<UserEditComponent> = this.dialog.open(UserEditComponent, {
       data: element
     });
@@ -40,7 +41,7 @@ export class UserListComponent implements OnInit {
     });
   }
 
-  onDelete(element: UserDto) {
+  onDelete(element: UserModel) {
     this.userService.delete(element._id);
   }
 }

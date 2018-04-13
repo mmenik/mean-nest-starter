@@ -1,10 +1,10 @@
 import { Controller, Post, HttpCode, HttpStatus, Get, Res, Body, BadRequestException, UseInterceptors } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { ApiUseTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
-import { LoginDto } from '../../../shared/src/dto/login.dto';
 import { LogInterceptor } from '../common/interceptors/log.interceptor';
-import { apiPath } from '../../../shared/src/api.path';
 import { Observable } from 'rxjs/Observable';
+import { apiPath } from '../api.path';
+import { LoginDto } from './login.dto';
 
 @ApiUseTags('Auth')
 @UseInterceptors(LogInterceptor)

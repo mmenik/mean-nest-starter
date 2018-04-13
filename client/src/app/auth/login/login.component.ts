@@ -2,10 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 
-import { LoginDto } from '../../../../../shared/src/dto/login.dto';
-
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../../app.reducer';
+import { LoginModel } from '../login.model';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +27,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    const login: LoginDto = {
+    const login: LoginModel = {
       username: this.form.value.username,
       password: this.form.value.password
     };

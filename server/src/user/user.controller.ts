@@ -3,9 +3,9 @@ import { ApiOperation, ApiResponse, ApiUseTags, ApiBearerAuth, ApiImplicitParam,
 import { UserService } from './user.service';
 import { LogService } from '../log/log.service';
 import { LogInterceptor } from '../common/interceptors/log.interceptor';
-import { UserDto } from '../../../shared/src/dto/user.dto';
-import { apiPath } from '../../../shared/src/api.path';
-import { User } from './user.entity';
+import { UserModel } from './user.model';
+import { UserDto } from './user.dto';
+import { apiPath } from '../api.path';
 
 @ApiBearerAuth()
 @ApiUseTags('Users')
@@ -18,7 +18,7 @@ export class UserController {
     @ApiOperation({ title: 'Get all users' })
     @ApiResponse({ status: 200, description: 'Find all users ok, returning list of user.', type: UserDto, isArray: true })
     @Get()
-    async findAll(): Promise<User[]> {
+    async findAll(): Promise<UserModel[]> {
         return await this.userService.findAll();
     }
 
@@ -27,14 +27,14 @@ export class UserController {
     @ApiResponse({ status: 400, description: 'Email or password are not valid!' })
     @HttpCode(HttpStatus.OK)
     @Post()
-    async create(@Body() user: UserDto): Promise<User> {
+    async create(@Body() user: UserDto): Promise<UserModel> {
         return await this.userService.createOne(user);
     }
 
     @ApiOperation({ title: 'Update user' })
     @ApiResponse({ status: 200, description: 'Update user are ok, returning udpdated user data.', type: UserDto })
     @Put()
-    async update(@Body() user: UserDto): Promise<User> {
+    async update(@Body() user: UserDto): Promise<UserModel> {
         return await this.userService.updateOne(user);
     }
 
@@ -42,7 +42,7 @@ export class UserController {
     @ApiResponse({ status: 200, description: 'Delete user are ok, returning deleted user data.', type: UserDto })
     @ApiImplicitParam({ name: 'id' })
     @Delete(':id')
-    async delete(@Param() params): Promise<User> {
+    async delete(@Param() params): Promise<UserModel> {
         return await this.userService.deleteOne(params.id);
     }
 }

@@ -1,11 +1,10 @@
 import * as jwt from 'jsonwebtoken';
 import { Component } from '@nestjs/common';
 import { LogService } from '../log/log.service';
-import { LoginDto } from '../../../shared/src/dto/login.dto';
 import { UserService } from '../user/user.service';
 import { PasswordCryptService } from './password/password-crypt.service';
-import { User } from '../user/user.entity';
 import { v4 } from 'uuid';
+import { UserModel } from '../user/user.model';
 
 @Component()
 // tslint:disable-next-line:component-class-suffix
@@ -38,7 +37,7 @@ export class AuthService {
     async authenticateUser(username: string, password: string): Promise<boolean> {
         this.log.info(`Authenticate user: ${JSON.stringify(username)}`);
         if (username && password) {
-            const user: User = await this.userService.findByUsername(username);
+            const user: UserModel = await this.userService.findByUsername(username);
             this.log.debug(`User:${JSON.stringify(user)}`);
             if (user) {
                 this.log.debug(`password:${password}, hash:${user.password}`);
@@ -51,7 +50,7 @@ export class AuthService {
     async validateUser(username: string): Promise<boolean> {
         this.log.info(`Validate user: ${JSON.stringify(username)}`);
         if (username) {
-            const user: User = await this.userService.findByUsername(username);
+            const user: UserModel = await this.userService.findByUsername(username);
             return Boolean(user);
         }
         return false;

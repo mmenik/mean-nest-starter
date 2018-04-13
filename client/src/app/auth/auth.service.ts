@@ -5,10 +5,9 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
-import { LoginDto } from '../../../../shared/src/dto/login.dto';
-import { apiPath } from '../../../../shared/src/api.path';
-
 import { LayoutService } from '../layout/layout.service';
+import { LoginModel } from './login.model';
+import { apiPath } from '../api.path';
 
 import { Store } from '@ngrx/store';
 import * as Auth from '../auth/auth.actions';
@@ -55,7 +54,7 @@ export class AuthService {
       });
   }
 
-  login(login: LoginDto): Observable<any> {
+  login(login: LoginModel): Observable<any> {
     this.store.dispatch(new Layout.ShowSpinner('Authentication...'));
     return this.http.post(apiPath(1, 'auth'), login)
       .map((data: any) => {

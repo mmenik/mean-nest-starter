@@ -1,7 +1,6 @@
 {
   "watch": [
-    "server/src",
-    "shared/src"
+    "server/src"
   ],
   "ext": "ts",
   "ignore": [

@@ -2,15 +2,15 @@ import { NestFactory } from '@nestjs/core';
 import { ApplicationModule } from './app.module';
 import { UserModule } from './user/user.module';
 import { UserService } from './user/user.service';
-import { User } from './user/user.entity';
-import { UserDto } from '../../shared/src/dto/user.dto';
+import { UserModel } from './user/user.model';
+import { UserDto } from './user/user.dto';
 
 async function seed() {
     const app = await NestFactory.create(ApplicationModule);
 
     const userService = app.select(UserModule).get(UserService);
 
-    const all: User[] = await userService.findAll();
+    const all: UserModel[] = await userService.findAll();
 
     if (all.length === 0) {
         const users: UserDto[] = [{
@@ -28,5 +28,7 @@ async function seed() {
 
         await userService.createMany(users);
     }
+
+    process.exit();
 }
 seed();

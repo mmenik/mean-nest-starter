@@ -2,10 +2,9 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { UserDto } from '../../../../shared/src/dto/user.dto';
-import { apiPath } from '../../../../shared/src/api.path';
-
 import { LayoutService } from '../layout/layout.service';
+import { UserModel } from './user.model';
+import { apiPath } from '../api.path';
 
 import { Store } from '@ngrx/store';
 import * as Layout from '../layout/layout.actions';
@@ -23,8 +22,8 @@ export class UserService {
 
     fetch() {
         this.store.dispatch(new Layout.ShowSpinner('Load Users...'));
-        this.http.get<UserDto[]>(apiPath(1, 'users'))
-            .map((users: UserDto[]) => users)
+        this.http.get<UserModel[]>(apiPath(1, 'users'))
+            .map((users: UserModel[]) => users)
             .catch((err: HttpErrorResponse) => Observable.throw(err))
             .subscribe(
                 users => {
@@ -41,7 +40,7 @@ export class UserService {
             );
     }
 
-    save(user: UserDto): Observable<UserDto> {
+    save(user: UserModel): Observable<UserModel> {
         console.log('User to save:', user);
         if (user._id) {
             return this.update(user);
@@ -49,30 +48,32 @@ export class UserService {
         return this.create(user);
     }
 
-    create(newUser: UserDto): Observable<UserDto> {
+    create(newUser: UserModel): Observable<UserModel> {
         console.log('Create user:', newUser);
         this.store.dispatch(new Layout.ShowSpinner('Create user...'));
-        return this.http.post<UserDto>(apiPath(1, 'users'), newUser)
-            .map((user: UserDto) => {
+        return this.http.post<UserModel>(apiPath(1, 'users'), newUser)
+            .map((user: UserModel) => {
                 console.log(user);
+                this.store.dispatch(new User.AddUser(user));
                 this.store.dispatch(new Layout.HideSpinner());
                 this.layoutService.showSnackbar('User created successfully', null, 2000);
                 return user;
             })
             .catch((err: HttpErrorResponse) => {
-                console.log('Create error:', err.error);
+                console.log('Create error:', err);
                 this.store.dispatch(new Layout.HideSpinner());
                 this.layoutService.showSnackbar(err.error.message, null, 2000);
                 return Observable.throw(err);
             });
     }
 
-    update(updateUser: UserDto): Observable<UserDto> {
+    update(updateUser: UserModel): Observable<UserModel> {
         console.log('Update user:', updateUser);
         this.store.dispatch(new Layout.ShowSpinner('Update user...'));
-        return this.http.put<UserDto>(apiPath(1, 'users'), updateUser)
-            .map((user: UserDto) => {
+        return this.http.put<UserModel>(apiPath(1, 'users'), updateUser)
+            .map((user: UserModel) => {
                 console.log(user);
+                this.store.dispatch(new User.UpdateUser(user));
                 this.store.dispatch(new Layout.HideSpinner());
                 this.layoutService.showSnackbar('User updated successfully', null, 2000);
                 return user;
@@ -90,9 +91,10 @@ export class UserService {
         this.store.dispatch(new Layout.ShowSpinner('Delete user...'));
         const url = `${apiPath(1, 'users')}/${_id}`;
         console.log(url);
-        this.http.delete<UserDto>(url)
-            .map((user: UserDto) => {
+        this.http.delete<UserModel>(url)
+            .map((user: UserModel) => {
                 console.log('User deleted:', user);
+                this.store.dispatch(new User.DeleteUser(user));
                 this.store.dispatch(new Layout.HideSpinner());
                 this.layoutService.showSnackbar('Delete user successfully', null, 2000);
             })
