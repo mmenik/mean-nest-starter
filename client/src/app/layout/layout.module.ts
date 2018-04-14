@@ -9,6 +9,7 @@ import { DateComponent } from './date/date.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { AppCommonModule } from '../app-common.module';
 import { RouterModule } from '@angular/router';
+import { AutofocusDirective } from './autofocus/autofocus.directive';
 
 @NgModule({
     declarations: [
@@ -17,7 +18,8 @@ import { RouterModule } from '@angular/router';
         FooterComponent,
         SidenavComponent,
         DateComponent,
-        SpinnerComponent
+        SpinnerComponent,
+        AutofocusDirective
     ],
     imports: [
         AppCommonModule,
@@ -27,7 +29,8 @@ import { RouterModule } from '@angular/router';
         HeaderComponent,
         FooterComponent,
         SidenavComponent,
-        SpinnerComponent
+        SpinnerComponent,
+        AutofocusDirective
     ]
 })
 export class LayoutModule { }

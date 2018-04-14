@@ -5,7 +5,7 @@
       <form fxLayout="column" fxLayoutGap="10px" [formGroup]="form" (ngSubmit)="onSubmit()">
         <p>Please login to continue</p>
         <mat-form-field>
-          <input type="text" matInput placeholder="Username *" formControlName="username" autofocus>
+          <input type="text" matInput placeholder="Username *" formControlName="username" appAutofocus>
           <mat-hint>Please enter a valid username</mat-hint>
           <mat-error>Invalid or missing username</mat-error>
         </mat-form-field>

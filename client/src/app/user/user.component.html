@@ -3,12 +3,12 @@
     <button mat-raised-button color="primary" (click)="onNewUser()" class="mat-button-toggle">
       <mat-icon>person_add</mat-icon>
     </button>
-    <button mat-raised-button color="primary" (click)="isSearch=!isSearch">
+    <button mat-raised-button color="primary" (click)="isSearch=!isSearch;">
       <mat-icon>search</mat-icon>
     </button>
     <form fxFlex fxLayout="column">
       <mat-form-field *ngIf="isSearch" fxFlex>
-        <input fxFlex type="text" matInput placeholder="Search user">
+        <input appAutofocus fxFlex type="text" matInput placeholder="Search user">
       </mat-form-field>
     </form>
     <mat-button-toggle-group [(ngModel)]="view">

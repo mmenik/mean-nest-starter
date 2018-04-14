@@ -11,13 +11,13 @@ export class UserComponent implements OnInit {
   view = 'table';
   isSearch = false;
 
-  constructor(private readonly dialog: MatDialog) { }
+  constructor(private readonly matDialog: MatDialog) { }
 
   ngOnInit() {
   }
 
   onNewUser() {
-    const dialogRef: MatDialogRef<UserEditComponent> = this.dialog.open(UserEditComponent);
+    const dialogRef: MatDialogRef<UserEditComponent> = this.matDialog.open(UserEditComponent);
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
     });
