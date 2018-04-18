@@ -5,6 +5,7 @@ import { UserService } from '../user/user.service';
 import { PasswordCryptService } from './password/password-crypt.service';
 import { v4 } from 'uuid';
 import { UserModel } from '../user/user.model';
+import { ExtractJwt } from 'passport-jwt';
 
 @Component()
 // tslint:disable-next-line:component-class-suffix
@@ -23,14 +24,45 @@ export class AuthService {
         this.log.info(`Create token for user: ${username}`);
         const secretOrPrivateKey: jwt.Secret = this.secret;
         const options: jwt.SignOptions = {
-            expiresIn: '10m',
+            expiresIn: '1m',
             algorithm: 'HS256'
         };
+
         const token = jwt.sign({ username }, secretOrPrivateKey, options);
         this.log.info(`Token: ${token}`);
+
         return {
+            username: username,
             expiresIn: options.expiresIn,
             token: token,
+        };
+    }
+
+    async renewToken(token: string) {
+        this.log.info(`Token to renew: ${token}`);
+
+        const payload = {};
+        const optionKeys = ['iat', 'exp', 'iss', 'sub'];
+
+        const decodec: string | object = await jwt.decode(token);
+
+        for (const key in decodec.valueOf()) {
+            if (optionKeys.indexOf(key) === -1) {
+                payload[key] = decodec[key];
+            }
+        }
+        const secretOrPrivateKey: jwt.Secret = this.secret;
+        const options: jwt.SignOptions = {
+            expiresIn: '1m',
+            algorithm: 'HS256'
+        };
+
+        const newToken = jwt.sign(payload, secretOrPrivateKey, options);
+        this.log.info(`Renew token: ${newToken}`);
+
+        return {
+            expiresIn: options.expiresIn,
+            token: newToken,
         };
     }
 

@@ -36,7 +36,7 @@ import { AppHttpInterceptor } from './app-http.interceptor';
     JwtModule.forRoot({
       config: {
         tokenGetter: () => {
-          return localStorage.getItem('token');
+          return localStorage.getItem('access_token');
         },
         whitelistedDomains: [/^null$/]
       }

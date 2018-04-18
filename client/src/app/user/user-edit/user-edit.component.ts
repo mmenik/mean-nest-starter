@@ -25,7 +25,6 @@ export class UserEditComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log('init dialog data passed:', this.user);
     this.title = `${this.user ? 'Edit' : 'New'} User`;
     this.store.select(fromRoot.getIsAuthenticated).subscribe(isAuth => {
       if (!isAuth) {

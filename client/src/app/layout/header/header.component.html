@@ -1,10 +1,13 @@
 <mat-toolbar color="primary">
-  <button [disabled]="!(isAuth$ | async)" mat-icon-button (click)="onToggleSidenav()">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <div>
-    <a routerLink="/">Header</a>
-  </div>  
+  <div fxFlex="33" fxLayout fxLayoutAlign="start center">
+    <button [disabled]="!(isAuth$ | async)" mat-icon-button (click)="onToggleSidenav()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <div>
+      <a routerLink="/">Header</a>
+    </div>
+  </div>
+  <div fxFlex="33" fxLayoutAlign="center center" *ngIf="isAuth$ | async">Username {{username$ | async}}</div>
   <div fxFlex fxLayout fxLayoutAlign="flex-end">
     <ul fxLayout fxLayoutGap="10px" class="navigation-items">
       <li *ngIf="isAuth$ | async">

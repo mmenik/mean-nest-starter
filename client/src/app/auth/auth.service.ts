@@ -58,8 +58,11 @@ export class AuthService {
     this.store.dispatch(new Layout.ShowSpinner('Authentication...'));
     return this.http.post(apiPath(1, 'auth'), login)
       .map((data: any) => {
-        localStorage.setItem('token', data.token);
-        this.store.dispatch(new Auth.SetAuthenticated(this.jwtHelper.getTokenExpirationDate(this.token)));
+        localStorage.setItem('access_token', data.token);
+        this.store.dispatch(new Auth.Login({
+          username: data.username,
+          tokenExpirationDate: this.jwtHelper.getTokenExpirationDate(this.token)
+        }));
         this.store.dispatch(new Layout.HideSpinner());
         this.start();
 
@@ -67,7 +70,7 @@ export class AuthService {
         return data;
       })
       .catch((err: HttpErrorResponse) => {
-        this.store.dispatch(new Auth.SetUnauthenticated());
+        this.store.dispatch(new Auth.Logout());
         this.store.dispatch(new Layout.HideSpinner());
 
         this.layoutService.showSnackbar(err.error.message, null, 2000);
@@ -75,14 +78,24 @@ export class AuthService {
       });
   }
 
+  renew() {
+    this.http.get(apiPath(1, 'auth/renew'))
+      .map((data: any) => {
+        localStorage.setItem('access_token', data.token);
+        this.store.dispatch(new Auth.Renew(this.jwtHelper.getTokenExpirationDate(this.token)));
+      })
+      .catch((err: HttpErrorResponse) => Observable.throw(err))
+      .subscribe();
+  }
+
   logout() {
-    this.store.dispatch(new Auth.SetUnauthenticated());
+    this.store.dispatch(new Auth.Logout());
     localStorage.clear();
     this.stop();
   }
 
   get token(): string {
-    return localStorage.getItem('token');
+    return localStorage.getItem('access_token');
   }
 
 }

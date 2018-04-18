@@ -28,7 +28,6 @@ export class UserListComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.store.select(fromUser.getUsers).subscribe(
       (users: UserModel[]) => {
-        console.log('DATA SOURCE:', users);
         this.matTableDataSource.data = users;
       }
     );

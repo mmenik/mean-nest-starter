@@ -1,5 +1,5 @@
 import { LogModule } from '../log/log.module';
-import { Module, NestModule, MiddlewaresConsumer } from '@nestjs/common';
+import { Module, NestModule, MiddlewaresConsumer, RequestMethod } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { JwtStrategy } from './passport/jwt.strategy';
 import { AuthController } from './auth.controller';
@@ -16,6 +16,6 @@ import { UserController } from '../user/user.controller';
 export class AuthModule implements NestModule {
     public configure(consumer: MiddlewaresConsumer) {
         consumer.apply(AuthMiddleware)
-            .forRoutes(UserController);
+            .forRoutes({ path: '/api/v1/auth/token', method: RequestMethod.GET }, UserController);
     }
 }

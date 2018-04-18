@@ -1,11 +1,14 @@
-import { Controller, Post, HttpCode, HttpStatus, Get, Res, Body, BadRequestException, UseInterceptors } from '@nestjs/common';
+import { Controller, Post, HttpCode, HttpStatus, Get, Req, Res, Body, BadRequestException, UseInterceptors } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { ApiUseTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiUseTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { LogInterceptor } from '../common/interceptors/log.interceptor';
 import { Observable } from 'rxjs/Observable';
 import { apiPath } from '../api.path';
 import { LoginDto } from './login.dto';
+import { ExtractJwt } from 'passport-jwt';
+import * as passport from 'passport';
 
+@ApiBearerAuth()
 @ApiUseTags('Auth')
 @UseInterceptors(LogInterceptor)
 @Controller(apiPath(1, 'auth'))
@@ -24,5 +27,13 @@ export class AuthController {
         }
 
         throw new BadRequestException('Incorrect email or password');
+    }
+
+    // Bug aperta segnalazione
+    // @ApiBearerAuth()
+    @ApiOperation({ title: 'Token' })
+    @Get('renew')
+    public async token(@Req() req) {
+        return await this.authService.renewToken(req.headers.authorization.split(' ')[1]);
     }
 }

@@ -25,6 +25,7 @@ export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
 export const metaReducers: MetaReducer<State>[] = !environment.production ? [logger] : [];
 
 export const getAuthState = createFeatureSelector<fromAuth.State>('auth');
+export const getUseranme = createSelector(getAuthState, fromAuth.getUsername);
 export const getIsAuthenticated = createSelector(getAuthState, fromAuth.getIsAuthenticated);
 export const getTokenExpirationDate = createSelector(getAuthState, fromAuth.getTokenExpirationDate);
 

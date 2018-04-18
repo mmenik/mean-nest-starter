@@ -1,0 +1,64 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Start Application",
+            "identifier": "strapp",
+            "type": "npm",
+            "script": "watch",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Start Client",
+            "identifier": "strclt",
+            "type": "npm",
+            "script": "watch:client",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Start Server",
+            "identifier": "strsrv",
+            "type": "npm",
+            "script": "watch:server",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "identifier": "ng test",
+            "type": "npm",
+            "script": "test",
+            "problemMatcher": [],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Build Server",
+            "identifier": "typescript",
+            "type": "typescript",
+            "tsconfig": "server\\tsconfig.json",
+            "problemMatcher": [
+                "$tsc"
+            ],
+            "option": "watch",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }        
+    ]
+}

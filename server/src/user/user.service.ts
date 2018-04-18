@@ -54,7 +54,6 @@ export class UserService {
             result = await this.model.create(userModel);
             this.log.debug(`User created ${JSON.stringify(result)}`);
         } catch (error) {
-            console.log(error);
             throw new UnprocessableEntityException('Validation failed', error);
         }
         return result;
@@ -74,7 +73,6 @@ export class UserService {
             result = await this.model.create(userMapped);
             this.log.debug(`Users created ${JSON.stringify(result)}`);
         } catch (error) {
-            console.log(error);
             throw new UnprocessableEntityException('Validation failed', error);
         }
 
@@ -89,7 +87,6 @@ export class UserService {
             result = await this.model.findByIdAndUpdate(user._id, user, { new: true }).exec();
             this.log.debug(`Users updated ${JSON.stringify(result)}`);
         } catch (error) {
-            console.log(error);
             throw new UnprocessableEntityException('Duplicate code', error);
         }
 

@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit {
   @Output() toggleSidenav = new EventEmitter<void>();
 
   isAuth$: Observable<boolean>;
+  username$: Observable<string>;
 
   constructor(
     private readonly store: Store<fromRoot.State>,
@@ -23,6 +24,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.isAuth$ = this.store.select(fromRoot.getIsAuthenticated);
+    this.username$ = this.store.select(fromRoot.getUseranme);
   }
 
   onToggleSidenav() {

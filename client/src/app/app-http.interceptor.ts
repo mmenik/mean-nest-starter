@@ -18,6 +18,7 @@ export class AppHttpInterceptor implements HttpInterceptor {
         //         Authorization: `Bearer ${localStorage.getItem('token')}`
         //     }
         // });
+        console.log('Request:', request);
         return next.handle(request).do(
             (event: HttpEvent<any>) => {
                 if (event instanceof HttpResponse) {
