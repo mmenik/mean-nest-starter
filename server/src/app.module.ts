@@ -10,7 +10,6 @@ import { LogMiddleware } from './common/middlewares/log.middleware';
 
 import { AuthController } from './auth/auth.controller';
 import { UserController } from './user/user.controller';
-import { ConfigModule } from './config/config.module';
 
 // import { environment } from './main';
 const environment = require(`./environments/environment${process.env.NODE_ENV === 'production' ? '.prod' : ''}`).environment;
@@ -22,8 +21,7 @@ const environment = require(`./environments/environment${process.env.NODE_ENV ==
     BagModule,
     LogModule,
     AuthModule,
-    UserModule,
-    ConfigModule
+    UserModule
   ]
 })
 export class ApplicationModule implements NestModule {

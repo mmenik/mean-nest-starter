@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "set NODE_ENV=production&&node ./dist/server/src/main.js",
+    "start": "set NODE_ENV=production&&node ./dist/main.js",
     "start:client": "ng serve",
     "build:client": "ng build --prod",
     "build:server": "tsc --project ./server",

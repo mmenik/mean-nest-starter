@@ -1,8 +1,8 @@
 {
     "apps": [
         {
-            "name": "mean-mest",
-            "script": "./dist/server/src/main.js",
+            "name": "mean-nest-starter",
+            "script": "./dist/main.js",
             "watch": true,
             "env": {
                 "NODE_ENV": "production"

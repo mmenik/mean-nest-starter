@@ -56,6 +56,7 @@ export class AuthService {
 
   login(login: LoginModel): Observable<any> {
     this.store.dispatch(new Layout.ShowSpinner('Authentication...'));
+    console.log(login);
     return this.http.post(apiPath(1, 'auth'), login)
       .map((data: any) => {
         localStorage.setItem('access_token', data.token);

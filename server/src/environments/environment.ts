@@ -1,7 +1,7 @@
 export const environment = {
     production: false,
     port: 3000,
-    dist: 'dist',
+    dist: '../../dist',
     orm: {
         type: 'mongodb',
         host: 'localhost',

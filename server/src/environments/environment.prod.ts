@@ -7,7 +7,7 @@ export const environment = {
         host: 'localhost',
         port: '27017',
         database: 'mean-nest-starter',
-        entities: ['dist/server/src/**/**.entity{.ts,.js}'],
+        entities: ['dist/**/**.entity{.ts,.js}'],
         synchronize: false
     }
 };

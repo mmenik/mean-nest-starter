@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { StoreModule } from '@ngrx/store';
-import { JwtModule } from '@auth0/angular-jwt';
+import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 import { AuthService } from './auth/auth.service';
 
@@ -20,6 +20,22 @@ import { LayoutService } from './layout/layout.service';
 import { UserService } from './user/user.service';
 import { AppHttpInterceptor } from './app-http.interceptor';
 
+// JwtModule.forRoot({
+//   config: {
+//     tokenGetter: () => {
+//       return localStorage.getItem('access_token');
+//     },
+//     whitelistedDomains: [/^null$/]
+//   }
+// })
+
+export function jwtOptionsFactory() {
+  return {
+    tokenGetter: () => localStorage.getItem('access_token'),
+    whitelistedDomains: [/^null$/]
+  };
+}
+
 @NgModule({
   declarations: [
     AppComponent
@@ -34,11 +50,9 @@ import { AppHttpInterceptor } from './app-http.interceptor';
     AuthModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     JwtModule.forRoot({
-      config: {
-        tokenGetter: () => {
-          return localStorage.getItem('access_token');
-        },
-        whitelistedDomains: [/^null$/]
+      jwtOptionsProvider: {
+        provide: JWT_OPTIONS,
+        useFactory: jwtOptionsFactory
       }
     })
   ],

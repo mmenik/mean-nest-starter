@@ -31,9 +31,9 @@ import 'rxjs/add/operator/delay';
 // dotenv.config();
 
 const environment = require(`./environments/environment${process.env.NODE_ENV === 'production' ? '.prod' : ''}`).environment;
-
+console.log(path.join(__dirname, environment.dist));
 const expressApp: express.Application = express();
-expressApp.use(express.static(path.join(__dirname, '../../', environment.dist)));
+expressApp.use(express.static(path.join(__dirname, environment.dist)));
 
 async function bootstrap() {
     const app = await NestFactory.create(ApplicationModule, expressApp, {});
@@ -46,7 +46,7 @@ async function bootstrap() {
 
     // app.setGlobalPrefix(apiPath(1, ''));
 
-    app.set('views', path.join(__dirname, '../../', environment.dist));
+    app.set('views', path.join(__dirname, environment.dist));
     app.set('view engine', 'hbs');
     // app.set('*.*', express.static(path.join(__dirname, 'public')));
 
