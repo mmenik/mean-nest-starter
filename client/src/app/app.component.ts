@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
-import { AuthService } from './auth/auth.service';
+import { AuthService } from './auth/services/auth.service';
 import { Observable } from 'rxjs/Observable';
 
 import { OverlayContainer } from '@angular/cdk/overlay';

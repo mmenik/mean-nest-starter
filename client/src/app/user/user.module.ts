@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
-import { UserComponent } from './user.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
+import { reducer } from './store/reducers/user.reducer';
+
 import { UserRoutingModule } from './user-routing.module';
 import { AppCommonModule } from '../app-common.module';
-import { UserListComponent } from './user-list/user-list.component';
-import { StoreModule } from '@ngrx/store';
-import { userReducer } from './user.reducer';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { UserEditComponent } from './user-edit/user-edit.component';
 import { CoreModule } from '../core/core.module';
+
+import { UserPageComponent } from './containers/user-page/user-page.component';
+import { UserEditComponent } from './components/user-edit/user-edit.component';
+import { UserListComponent } from './components/user-list/user-list.component';
 
 @NgModule({
   imports: [
@@ -16,10 +18,10 @@ import { CoreModule } from '../core/core.module';
     FormsModule,
     ReactiveFormsModule,
     CoreModule,
-    StoreModule.forFeature('user', userReducer)
+    StoreModule.forFeature('user', reducer)
   ],
   declarations: [
-    UserComponent,
+    UserPageComponent,
     UserListComponent,
     UserEditComponent
   ],

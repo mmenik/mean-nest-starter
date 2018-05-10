@@ -8,8 +8,8 @@ import { environment } from '../environments/environment';
  */
 import { storeFreeze } from 'ngrx-store-freeze';
 
-import * as fromAuth from './auth/auth.reducer';
-import * as fromLayout from './core/layout.reducer';
+import * as fromAuth from './auth/store/reducers/auth.reducer';
+import * as fromLayout from './core/store/reducers/layout.reducer';
 
 export interface State {
     auth: fromAuth.State;
@@ -17,8 +17,8 @@ export interface State {
 }
 
 export const reducers: ActionReducerMap<State> = {
-    auth: fromAuth.authReducer,
-    layout: fromLayout.layoutReducer
+    auth: fromAuth.reducer,
+    layout: fromLayout.reducer,
 };
 
 export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
