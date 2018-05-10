@@ -33,4 +33,4 @@ import { AutofocusDirective } from './autofocus/autofocus.directive';
         AutofocusDirective
     ]
 })
-export class LayoutModule { }
+export class CoreModule { }

@@ -2,7 +2,6 @@ import { Middleware, NestMiddleware, ExpressMiddleware, UnauthorizedException } 
 import { Request, Response, NextFunction } from 'express';
 
 import * as passport from 'passport';
-import { ExtractJwt } from 'passport-jwt';
 
 @Middleware()
 export class AuthMiddleware implements NestMiddleware {

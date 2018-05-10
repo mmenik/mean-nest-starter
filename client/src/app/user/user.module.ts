@@ -7,7 +7,7 @@ import { StoreModule } from '@ngrx/store';
 import { userReducer } from './user.reducer';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserEditComponent } from './user-edit/user-edit.component';
-import { LayoutModule } from '../layout/layout.module';
+import { CoreModule } from '../core/core.module';
 
 @NgModule({
   imports: [
@@ -15,7 +15,7 @@ import { LayoutModule } from '../layout/layout.module';
     UserRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    LayoutModule,
+    CoreModule,
     StoreModule.forFeature('user', userReducer)
   ],
   declarations: [

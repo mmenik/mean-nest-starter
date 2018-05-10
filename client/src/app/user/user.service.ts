@@ -2,12 +2,12 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { LayoutService } from '../layout/layout.service';
+import { LayoutService } from '../core/layout.service';
 import { UserModel } from './user.model';
 import { apiPath } from '../api.path';
 
 import { Store } from '@ngrx/store';
-import * as Layout from '../layout/layout.actions';
+import * as Layout from '../core/layout.actions';
 import * as User from './user.actions';
 import * as fromUser from './user.reducer';
 import { AuthService } from '../auth/auth.service';

@@ -9,7 +9,7 @@ export class LogMiddleware implements NestMiddleware {
 
     resolve(param: string): ExpressMiddleware {
         return (req: Request, res: Response, next: NextFunction) => {
-            this.log.debug(`${param} url:${req.url}, method:${req.method}`);
+            this.log.debug(`${param} url:${req.url}, method:${req.method}, body:${req.body}`);
             next();
         };
     }

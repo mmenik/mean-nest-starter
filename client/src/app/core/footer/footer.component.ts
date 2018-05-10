@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 import { Store } from '@ngrx/store';
-import * as Layout from '../../layout/layout.actions';
+import * as Layout from '../../core/layout.actions';
 import * as fromRoot from '../../app.reducer';
 
 @Component({

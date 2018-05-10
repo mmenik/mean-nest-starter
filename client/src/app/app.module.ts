@@ -12,11 +12,11 @@ import { AppComponent } from './app.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './auth/auth.module';
-import { LayoutModule } from './layout/layout.module';
+import { CoreModule } from './core/core.module';
 
 import { reducers, metaReducers } from './app.reducer';
 import { AppCommonModule } from './app-common.module';
-import { LayoutService } from './layout/layout.service';
+import { LayoutService } from './core/layout.service';
 import { UserService } from './user/user.service';
 import { AppHttpInterceptor } from './app-http.interceptor';
 
@@ -46,7 +46,7 @@ export function jwtOptionsFactory() {
     HttpClientModule,
     AppCommonModule,
     AppRoutingModule,
-    LayoutModule,
+    CoreModule,
     AuthModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     JwtModule.forRoot({

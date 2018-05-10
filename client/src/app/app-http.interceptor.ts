@@ -1,7 +1,7 @@
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { LayoutService } from './layout/layout.service';
+import { LayoutService } from './core/layout.service';
 import { AuthService } from './auth/auth.service';
 
 @Injectable()

@@ -1,8 +1,15 @@
 import { ActionReducerMap, createFeatureSelector, createSelector, ActionReducer, MetaReducer } from '@ngrx/store';
 import { environment } from '../environments/environment';
 
+/**
+ * storeFreeze prevents state from being mutated. When mutation occurs, an
+ * exception will be thrown. This is useful during development mode to
+ * ensure that none of the reducers accidentally mutates the state.
+ */
+import { storeFreeze } from 'ngrx-store-freeze';
+
 import * as fromAuth from './auth/auth.reducer';
-import * as fromLayout from './layout/layout.reducer';
+import * as fromLayout from './core/layout.reducer';
 
 export interface State {
     auth: fromAuth.State;
@@ -22,7 +29,9 @@ export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
     };
 }
 
-export const metaReducers: MetaReducer<State>[] = !environment.production ? [logger] : [];
+export const metaReducers: MetaReducer<State>[] = !environment.production
+    ? [logger, storeFreeze]
+    : [];
 
 export const getAuthState = createFeatureSelector<fromAuth.State>('auth');
 export const getUseranme = createSelector(getAuthState, fromAuth.getUsername);

@@ -5,13 +5,13 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
-import { LayoutService } from '../layout/layout.service';
+import { LayoutService } from '../core/layout.service';
 import { LoginModel } from './login.model';
 import { apiPath } from '../api.path';
 
 import { Store } from '@ngrx/store';
 import * as Auth from '../auth/auth.actions';
-import * as Layout from '../layout/layout.actions';
+import * as Layout from '../core/layout.actions';
 import * as fromRoot from '../app.reducer';
 
 @Injectable()
@@ -90,6 +90,7 @@ export class AuthService {
   }
 
   logout() {
+    console.log('Logout');
     this.store.dispatch(new Auth.Logout());
     localStorage.clear();
     this.stop();
