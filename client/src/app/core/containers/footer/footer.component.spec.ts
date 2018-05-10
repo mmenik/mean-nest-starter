@@ -1,12 +1,14 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FooterComponent } from './footer.component';
-import { DateComponent } from '../date/date.component';
+import { DateComponent } from '../../components/date/date.component';
+
+import { AppMaterialModule } from '../../../app-material.module';
+
 import { StoreModule, Store } from '@ngrx/store';
 
-import * as Layout from '../../core/layout.actions';
-import * as fromRoot from '../../app.reducer';
-import { AppMaterialModule } from '../../app-material.module';
+import { ToggleTheme } from '../../store/actions/layout.actions';
+import * as fromRoot from '../../../app.reducer';
 
 describe('FooterComponent', () => {
   let component: FooterComponent;
@@ -41,7 +43,7 @@ describe('FooterComponent', () => {
   });
 
   it('should dispatch an action to toggle theme', () => {
-    const action = new Layout.ToggleTheme();
+    const action = new ToggleTheme();
 
     component.onToggleTheme();
 

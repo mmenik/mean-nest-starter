@@ -18,15 +18,15 @@ export const initialState: UserState = {
 
 export function reducer(state = initialState, action: UserActions) {
     switch (action.type) {
-        case UserActionTypes.SET_USERS:
-            return {
-                ...state,
-                users: action.payload
-            };
-        case UserActionTypes.ADD_USER:
+        case UserActionTypes.CREATE_USER:
             return {
                 ...state,
                 users: [...state.users, action.payload]
+            };
+        case UserActionTypes.READ_USERS:
+            return {
+                ...state,
+                users: action.payload
             };
         case UserActionTypes.UPDATE_USER:
             return {

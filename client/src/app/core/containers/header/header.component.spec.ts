@@ -1,12 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HeaderComponent } from './header.component';
-import { AppMaterialModule } from '../../app-material.module';
+import { AuthService } from '../../../auth/services/auth.service';
 
-import * as Auth from '../../auth/auth.actions';
-import * as fromRoot from '../../app.reducer';
 import { StoreModule, Store } from '@ngrx/store';
-import { AuthService } from '../../auth/auth.service';
+import { Logout } from '../../../auth/store/actions/auth.actions';
+import * as fromRoot from '../../../app.reducer';
+import { AppMaterialModule } from '../../../app-material.module';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -18,7 +18,7 @@ describe('HeaderComponent', () => {
   beforeAll(() => {
     authServiceStub = {
       logout: () => {
-        store.dispatch(new Auth.Logout);
+        store.dispatch(new Logout);
       }
     };
   });
@@ -51,7 +51,7 @@ describe('HeaderComponent', () => {
   });
 
   it('should dispatch an action on logout', () => {
-    const action = new Auth.Logout();
+    const action = new Logout();
 
     authService = fixture.debugElement.injector.get(AuthService);
     authService.logout();

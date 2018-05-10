@@ -31,7 +31,7 @@ export class UserListComponent implements OnInit, AfterViewInit {
         this.matTableDataSource.data = users;
       }
     );
-    this.userService.fetch();
+    this.userService.read();
   }
 
   ngAfterViewInit() {

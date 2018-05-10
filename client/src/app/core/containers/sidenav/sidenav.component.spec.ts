@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SidenavComponent } from './sidenav.component';
-import { AppMaterialModule } from '../../app-material.module';
+import { AppMaterialModule } from '../../../app-material.module';
 
 describe('SidenavComponent', () => {
   let component: SidenavComponent;

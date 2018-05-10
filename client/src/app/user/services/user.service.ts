@@ -11,7 +11,7 @@ import { User } from '../models/user.model';
 
 import { Store } from '@ngrx/store';
 import { LayoutActionTypes, ShowSpinner, HideSpinner, UpdateSpinner } from '../../core/store/actions/layout.actions';
-import { UserActionTypes, AddUser, UpdateUser, SetUsers, DeleteUser } from '../store/actions/user.actions';
+import { UserActionTypes, CreateUser, ReadUsers, UpdateUser, DeleteUser } from '../store/actions/user.actions';
 import * as fromUser from '../store/reducers/user.reducer';
 
 @Injectable()
@@ -24,7 +24,7 @@ export class UserService {
         private readonly store: Store<fromUser.State>
     ) { }
 
-    fetch() {
+    read() {
         this.store.dispatch(new ShowSpinner('Load Users...'));
         this.http.get<User[]>(apiPath(1, 'users'))
             .map((users: User[]) => users)
@@ -32,7 +32,7 @@ export class UserService {
             .subscribe(
                 users => {
                     this.store.dispatch(new HideSpinner());
-                    this.store.dispatch(new SetUsers(users));
+                    this.store.dispatch(new ReadUsers(users));
                     this.layoutService.showSnackbar('Load users successfully', null, 2000);
                     this.authService.renew();
                 },
@@ -54,7 +54,7 @@ export class UserService {
         this.store.dispatch(new ShowSpinner('Create user...'));
         return this.http.post<User>(apiPath(1, 'users'), newUser)
             .map((user: User) => {
-                this.store.dispatch(new AddUser(user));
+                this.store.dispatch(new CreateUser(user));
                 this.store.dispatch(new HideSpinner());
                 this.layoutService.showSnackbar('User created successfully', null, 2000);
                 return user;
